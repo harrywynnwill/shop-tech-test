@@ -1,37 +1,47 @@
 "use strict";
 
-var Voucher = function (shoppingCart){
-  this.ONE = 1;
-  this.FIVE = 5;
-  this.TEN = 10;
-  this.FIFTEEN = 15;
-  this.FIFTY = 50;
-  this.SEVENTYFIVE = 75;
-  this.FIFTEEN_ERROR = "need more than \u00A315 to redeem";
-  this.FIFTY_ERROR = "need more than \u00A350 to redeem";
-  this.SEVENTYFIVE_ERROR = "need more than \u00A3575 and a pair of shoes to redeem";
-  this.shoppingCart = shoppingCart;
+var Voucher = function (){
+  this._ONE = 1;
+  this._FIVE = 5;
+  this._TEN = 10;
+  this._FIFTEEN = 15;
+  this._FIFTY = 50;
+  this._SEVENTYFIVE = 75;
+  this._FIFTY_ERROR = "need more than \u00A350 to redeem";
+  this._SEVENTYFIVE_ERROR = "need more than \u00A375 and a pair of shoes to redeem";
 };
 
-Voucher.prototype.Fifteen = function () {
-  return this.isOverFifteen() ? this.shoppingCart.removeVoucher(this.FIVE) : this.FIFTEEN_ERROR
+Voucher.prototype.five = function (basket) {
+   return this._fiveDiscounter(basket)
 };
-Voucher.prototype.Fifty = function () {
-  return this.isOverFifty() ? this.shoppingCart.removeVoucher(this.TEN) : this.FIFTY_ERROR
+Voucher.prototype.ten = function (basket) {
+  return this._isOverFifty(basket) ? this._fifteenDiscounter(basket) : this._FIFTY_ERROR;
 };
-Voucher.prototype.SeventyFive = function () {
-  if(this.isOverFifty() && this.shoppingCart.footwearCounter() >= this.ONE){
-    this.shoppingCart.removeVoucher(this.FIFTEEN)
+Voucher.prototype.fifteen = function (basket, counter) {
+  if(this._isOverSeventyFive(basket) && counter >= this._ONE){
+    return this._fiftyDiscounter(basket)
   }
-  return this.SEVENTYFIVE_ERROR;
+  return this._SEVENTYFIVE_ERROR;
 };
 
-Voucher.prototype.isOverFifteen = function (){
-  return this.shoppingCart.basketTotal() > this.FIFTEEN;
+Voucher.prototype._isOverFifteen = function (basket){
+  return basket > this._FIFTEEN;
 };
-Voucher.prototype.isOverFifty = function () {
-  return this.shoppingCart.basketTotal() > this.FIFTY;
+Voucher.prototype._isOverFifty = function (basket) {
+  return basket > this._FIFTY;
 };
-Voucher.prototype.isOverSeventyFive = function (){
-  return this.shoppingCart.basketTotal() > this.SEVENTYFIVE;
+Voucher.prototype._isOverSeventyFive = function (basket){
+  return basket > this._SEVENTYFIVE;
+};
+
+Voucher.prototype._fiveDiscounter = function (basket){
+  return basket - this._FIVE;
+};
+
+Voucher.prototype._fifteenDiscounter = function (basket){
+  return basket - this._TEN;
+};
+
+Voucher.prototype._fiftyDiscounter = function (basket){
+  return basket - this._FIFTEEN;
 };

@@ -1,8 +1,9 @@
 "use strict";
 
-var ShoppingCart = function () {
+var ShoppingCart = function (voucher) {
+  this.voucher = voucher;
   this.basket = [];
-  this.FOOTWEAR =  "Footwear";
+  this._FOOTWEAR =  "Footwear";
 };
 
 ShoppingCart.prototype.addItem = function (item) {
@@ -16,24 +17,37 @@ ShoppingCart.prototype.removeItem = function (item) {
 
 ShoppingCart.prototype.basketTotal = function (){
   var total = this.basket.map(function(number){return number.price})
-    .reduce(function(a,b){return a+b});
-      return total;
+  .reduce(function(a,b){return a+b});
+  return total;
+};
+
+ShoppingCart.prototype.voucherChoice = function (voucher){
+  var basketTotal = this.basketTotal();
+  switch(voucher){
+    case 5:
+      return this.voucher.five(basketTotal);
+      break;
+    case 10:
+      console.log(basketTotal)
+      return this.voucher.ten(basketTotal);
+      break;
+    case 15:
+      return this.voucher.fifteen(basketTotal, this._footwearCounter());
+      break;
+    }
 };
 
 ShoppingCart.prototype.basketViewer = function () {
   return this.basket;
 };
 
-ShoppingCart.prototype.removeVoucher = function (value){
-  return this.basketTotal() - value;
-};
 
-ShoppingCart.prototype.footwearCounter = function () {
+ShoppingCart.prototype._footwearCounter = function () {
   var shoeTotal = 0;
   for (var item in this.basket){
-    if(this.basket[item].category.includes("Footwear")){
+    if(this.basket[item].category.includes(this._FOOTWEAR)){
       shoeTotal++;
     }
   }
- return shoeTotal;
+  return shoeTotal;
 };

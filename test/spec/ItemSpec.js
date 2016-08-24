@@ -1,9 +1,8 @@
 describe("Item", function(){
-  var item;
+
   beforeEach(function(){
     item = new Item("Suede Shoes, Blue","Women\'s Footwear",270,10);
   })
-
 
   it("creates items", function(){
     expect(item).toEqual(jasmine.objectContaining({
@@ -11,7 +10,6 @@ describe("Item", function(){
       category: "Women\'s Footwear",
       price: 270,
       quantityInStock: 10
-
     }));
   });
 
@@ -30,8 +28,13 @@ describe("Item", function(){
       }
       expect(item.inStock()).toBe(false);
     });
-  });
     it("returns true if the item is in stock", function(){
       expect(item.inStock()).toBe(true);
     });
+  });
+  describe("get produtct name", function(){
+    it("returns the name of the product from the item", function(){
+      expect(item.getProductName()).toEqual("Suede Shoes, Blue")
+    });
+  });
 });

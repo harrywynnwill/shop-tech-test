@@ -1,51 +1,34 @@
 describe("Voucher", function(){
-  var vouchers;
 
   beforeEach(function(){
-    shoppingCart = jasmine.createSpyObj('shoppingCart',['addItem', 'removeItem', 'basketTotal','removeVoucher','footwearCounter']);
-    voucher = new Voucher(shoppingCart);
+   voucher = new Voucher();
   });
 
-  describe("15 pounds off", function(){
-    it("removes five pounds from the basket total if the total is more than 15", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 16;});
-      voucher.Fifteen();
-      expect(shoppingCart.removeVoucher).toHaveBeenCalledWith(5);
+  describe("removes \u00A35 on orders", function(){
+    it("removes \u00A35 from the basket total if the total is more than \u00A315", function(){
+      expect(voucher.five(16)).toEqual(11);
+    });
+  });
+
+  describe("removes \u00A310 on order over \u00A350", function(){
+    it("removes \u00A310 pounds from the basket on orders over \u00A350", function(){
+      expect(voucher.ten(51)).toEqual(41);
     });
     it("gives an error message saying that the user cannot apply the voucher", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 13;});
-      expect(voucher.Fifteen()).toEqual("need more than \u00A315 to redeem")
+      expect(voucher.ten(49)).toEqual("need more than \u00A350 to redeem");
     });
   });
 
-  describe("50 pounds off", function(){
-    it("removes 15 pounds on orders over 50 pounds", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 51;});
-      voucher.Fifty();
-      expect(shoppingCart.removeVoucher).toHaveBeenCalledWith(10);
-    });
-    it("gives an error message saying that the user cannot apply the voucher", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 49;});
-      expect(voucher.Fifty()).toEqual("need more than \u00A350 to redeem");
-    });
-  });
-
-  describe("75 pounds off", function(){
+  describe("removes \u00A315 on orders over \u00A375", function(){
     it("removes 15 pounds on an order over 75 pounds with shoes", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 76;});
-      shoppingCart.footwearCounter.and.callFake(function() { return 1;});
-      voucher.SeventyFive();
-      expect(shoppingCart.removeVoucher).toHaveBeenCalledWith(15);
+      expect(voucher.fifteen(76, 1)).toEqual(61);
     });
-    it("gives an error message if over 75 pounds but no shoes", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 76;});
-      shoppingCart.footwearCounter.and.callFake(function() { return 1;});
-      expect(voucher.SeventyFive()).toEqual("need more than \u00A3575 and a pair of shoes to redeem");
+    it("gives an error message if over \u00A375 but no shoes", function(){
+      expect(voucher.fifteen(76, 0)).toEqual("need more than \u00A375 and a pair of shoes to redeem");
     });
-    it("gives an error message if under 75 pounds but with shoes", function(){
-      shoppingCart.basketTotal.and.callFake(function() { return 73;});
-      shoppingCart.footwearCounter.and.callFake(function() { return 2;});
-      expect(voucher.SeventyFive()).toEqual("need more than \u00A3575 and a pair of shoes to redeem");
+    it("gives an error message if \u00A375 pounds but with shoes", function(){
+      expect(voucher.fifteen(74, 1)).toEqual("need more than \u00A375 and a pair of shoes to redeem");
+
     });
   });
 });

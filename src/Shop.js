@@ -1,10 +1,9 @@
 "use strict";
 
-var Shop = function (shoppingCart, voucher){
-  this.shoppingCart = shoppingCart;
-  this.voucher = voucher;
+var Shop = function (shoppingCart){
+  this.shoppingCart = shoppingCart
   this.products = [];
-  this.ERROR = " out of stock!"
+  this._ERROR = " out of stock!"
 };
 
 Shop.prototype.addProduct = function (item) {
@@ -16,17 +15,15 @@ Shop.prototype.addToCart = function (item) {
     item.removeStock();
     this.shoppingCart.addItem(item);
   }
-  return item.getProductName() + this.ERROR;
+  return item.getProductName() + this._ERROR;
 };
 
 Shop.prototype.removeFromCart = function (item) {
   this.shoppingCart.removeItem(item);
 };
 
-Shop.prototype.applyFiveVoucher = function (){
-  if(this.voucher.overFifteen(this.totalCart)){
-    this.shoppingCart.removeFivePounds();
-  }
+Shop.prototype.totalCartVoucher = function (voucher) {
+  return this.shoppingCart.voucherChoice(voucher)
 };
 
 Shop.prototype.viewBasket = function(){

@@ -1,14 +1,14 @@
 describe("Shop", function(){
-  var shop;
-  var shoppingCart;
+
 
   beforeEach(function(){
-    shoppingCart = jasmine.createSpyObj('shoppingCart',['addItem', 'removeItem', 'basketTotal']);
-    shop = new Shop(shoppingCart);
     blueSuedeShoes = jasmine.createSpyObj('blueSuedeShoes',['inStock','removeStock', 'getProductName']);
+    shoppingCart = jasmine.createSpyObj('shoppingCart',['addItem', 'removeItem', 'total', 'basketTotal',
+     'basketViewer','voucherChoice']);
+    shop = new Shop(shoppingCart);
   });
 
-  describe("adding items to the shop", function(){
+  describe("adding productd to the shop", function(){
     it("adds products to the shop for consumers to buy", function(){
       shop.addProduct(blueSuedeShoes);
       expect(shop.products).toEqual([blueSuedeShoes]);
@@ -35,6 +35,7 @@ describe("Shop", function(){
       expect(shoppingCart.removeItem).toHaveBeenCalledWith(blueSuedeShoes);
     });
   });
+
   describe("the total of the basket", function(){
     it("shows the user the baskets total", function(){
       shop.totalCart();
@@ -42,6 +43,17 @@ describe("Shop", function(){
     });
   });
 
+  describe("view the basket", function(){
+    it("shows the user the contents of the basket", function(){
+      shop.viewBasket();
+      expect(shoppingCart.basketViewer).toHaveBeenCalled();
+    });
+  });
 
-
+  describe("the total of the basket with vouchers", function(){
+    it("shows the user the baskets total when vouchers are applied", function(){
+      shop.totalCartVoucher(1);
+      expect(shoppingCart.voucherChoice).toHaveBeenCalledWith(1);
+    });
+  });
 });

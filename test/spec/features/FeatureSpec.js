@@ -21,9 +21,9 @@ describe("Feature Test", function(){
     birdPrintDress = new Item("Bird Print Dress, Black", "Women\’s Formalwear", 270, 10);
     dressPink = new Item("Mid Twist Cut-Out Dress, Pink", "Women\’s Formalwear", 540, 5);
 
-    shoppingCart = new ShoppingCart();
-    voucher = new Voucher(shoppingCart);
-    shop = new Shop(shoppingCart, voucher);
+    voucher = new Voucher();
+    shoppingCart = new ShoppingCart(voucher);
+    shop = new Shop(shoppingCart);
 
     shop.addProduct(almondToeShoes);
     shop.addProduct(suedeShoes);
@@ -39,42 +39,43 @@ describe("Feature Test", function(){
     shop.addProduct(dressPink);
   });
     it("1. As a User I can add a product to my shopping cart", function(){
-      shop.addToCart(almondToeShoes)
-      expect(shop.viewBasket()).toContain(almondToeShoes)
-    });
-    it("2. As a User I can remove a product from my shopping cart.", function(){
-      shop.addToCart(almondToeShoes)
-      shop.addToCart(sharkSkinWaist)
-      shop.removeFromCart(almondToeShoes)
-      expect(shop.viewBasket()).not.toContain(almondToeShoes)
-      expect(shop.viewBasket()).toContain(sharkSkinWaist)
-    });
-    it("3. As a User I can view the total price for the products in my shopping cart.", function(){
-      shop.addToCart(goldCardigan);
-      shop.addToCart(cottonShorts);
-      shop.addToCart(shortSleeveGrey);
-      shop.addToCart(shortSleeveGreen);
-      expect(shop.totalCart()).toEqual(286.98)
-    });
-
-
-
-    it("buying all the items in the shop which excludes out of stock blue flip flop ", function(){
       shop.addToCart(almondToeShoes);
-      shop.addToCart(suedeShoes);
-      shop.addToCart(leatherDriver);
-      shop.addToCart(flipFlopsRed);
-      shop.addToCart(flipFlopsBlue);
-      shop.addToCart(goldCardigan);
-      shop.addToCart(cottonShorts);
+      expect(shop.viewBasket()).toContain(almondToeShoes);
+    });
+
+    it("2. As a User I can remove a product from my shopping cart.", function(){
+      shop.addToCart(almondToeShoes);
+      shop.addToCart(sharkSkinWaist);
+      shop.removeFromCart(almondToeShoes);
+      expect(shop.viewBasket()).not.toContain(almondToeShoes);
+      expect(shop.viewBasket()).toContain(sharkSkinWaist);
+    });
+
+    it("3. As a User I can view the total price for the products in my shopping cart.", function(){
       shop.addToCart(shortSleeveGrey);
       shop.addToCart(shortSleeveGreen);
-      shop.addToCart(sharkSkinWaist);
-      shop.addToCart(blazer);
-      shop.addToCart(birdPrintDress);
-      shop.addToCart(dressPink);
-      expect(shop.addToCart(flipFlopsBlue)).toEqual("Flip Flops, Blue out of stock!")
-      expect(shop.basket).not.toContain(flipFlopsBlue);
-      expect(shop.totalCart()).toEqual(1541.48)
+      expect(shop.totalCart()).toEqual(89.98);
+    });
+
+    it("4. As a User I can apply a voucher to my shopping cart.", function(){
+      shop.addToCart(shortSleeveGrey);
+      shop.addToCart(shortSleeveGreen);
+      expect(shop.totalCartVoucher(5)).toEqual(84.98);
+    });
+
+    it("5. As a User I can view the total price for the products\
+     in my shopping cart with discounts applied.", function(){
+      shop.addToCart(shortSleeveGrey);
+      shop.addToCart(shortSleeveGreen);
+      expect(shop.totalCartVoucher(10)).toEqual(79.98);
+    });
+
+    it("6. As a User I am alerted when I apply an invalid voucher to my shopping cart.", function(){
+      shop.addToCart(flipFlopsRed);
+      expect(shop.totalCartVoucher(15)).toEqual("need more than \u00A375 and a pair of shoes to redeem");
+    });
+
+    it("7. As a User I am unable to Out of Stock products to the shopping cart.", function(){
+        expect(shop.addToCart(flipFlopsBlue)).toEqual("Flip Flops, Blue out of stock!");
     });
   });
