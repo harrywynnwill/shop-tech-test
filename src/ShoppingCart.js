@@ -44,6 +44,7 @@ ShoppingCart.prototype.basketViewer = function () {
 
 ShoppingCart.prototype._footwearCounter = function () {
   var shoeTotal = 0;
+  var category;
   for (var item in this.basket){
     if(this.basket[item].category.includes(this._FOOTWEAR)){
       shoeTotal++;
