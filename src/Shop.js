@@ -23,7 +23,7 @@ Shop.prototype.removeFromCart = function (item) {
 };
 
 Shop.prototype.totalCartVoucher = function (voucher) {
-  return this.shoppingCart.voucherChoice(voucher)
+  return this.shoppingCart.voucherChoice(voucher);
 };
 
 Shop.prototype.viewBasket = function(){
