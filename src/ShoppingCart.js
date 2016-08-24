@@ -28,7 +28,6 @@ ShoppingCart.prototype.voucherChoice = function (voucher){
       return this.voucher.five(basketTotal);
       break;
     case 10:
-      console.log(basketTotal)
       return this.voucher.ten(basketTotal);
       break;
     case 15:
