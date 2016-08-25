@@ -43,7 +43,8 @@ ShoppingCart.prototype.basketViewer = function () {
 ShoppingCart.prototype._footwearCounter = function () {
   var shoeTotal = 0;
   for (var item in this.basket){
-    if(this.basket[item].category.includes(this._FOOTWEAR)){
+    var category = this.basket[item].category;
+    if(category.includes(this._FOOTWEAR)){
       shoeTotal++;
     }
   }
