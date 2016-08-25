@@ -3,7 +3,7 @@
 var Shop = function (shoppingCart){
   this.shoppingCart = shoppingCart
   this.products = [];
-  this._ERROR = " out of stock!"
+  this.ERROR = " out of stock!"
 };
 
 Shop.prototype.addProduct = function (item) {
@@ -15,7 +15,7 @@ Shop.prototype.addToCart = function (item) {
     item.removeStock();
     this.shoppingCart.addItem(item);
   }
-  return item.getProductName() + this._ERROR;
+  return item.getProductName() + this.ERROR;
 };
 
 Shop.prototype.removeFromCart = function (item) {

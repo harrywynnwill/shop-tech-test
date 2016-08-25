@@ -7,21 +7,21 @@ var Voucher = function (){
   this._FIFTEEN = 15;
   this._FIFTY = 50;
   this._SEVENTYFIVE = 75;
-  this._FIFTY_ERROR = "need more than \u00A350 to redeem";
-  this._SEVENTYFIVE_ERROR = "need more than \u00A375 and a pair of shoes to redeem";
+  this.FIFTY_ERROR = "need more than \u00A350 to redeem";
+  this.SEVENTYFIVE_ERROR = "need more than \u00A375 and a pair of shoes to redeem";
 };
 
 Voucher.prototype.five = function (basket) {
    return this._fiveDiscounter(basket)
 };
 Voucher.prototype.ten = function (basket) {
-  return this._isOverFifty(basket) ? this._fifteenDiscounter(basket) : this._FIFTY_ERROR;
+  return this._isOverFifty(basket) ? this._fifteenDiscounter(basket) : this.FIFTY_ERROR;
 };
 Voucher.prototype.fifteen = function (basket, counter) {
   if(this._isOverSeventyFive(basket) && counter >= this._ONE){
     return this._fiftyDiscounter(basket)
   }
-  return this._SEVENTYFIVE_ERROR;
+  return this.SEVENTYFIVE_ERROR;
 };
 
 Voucher.prototype._isOverFifteen = function (basket){

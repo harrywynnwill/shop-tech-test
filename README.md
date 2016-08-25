@@ -47,7 +47,7 @@ I chose 4 classes for the test:
 
 +  ShoppingCart  - is the class with the main logic for the program and is injected to the shop
 
-  I was unsure on using the switch statement but I thought it was cleaner than having a method with 1 parameter, than a method for each voucher
+  I was unsure on using the switch statement but I thought it was cleaner having a method with 1 parameter, than a method for each voucher
 
 +  Shop - is the main interface and would be the front-end for the customers.
 
