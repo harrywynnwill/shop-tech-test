@@ -34,9 +34,9 @@ If you look in `test/spec/features` each user story is a feature test.
 
 I built it using TDD, the feature and unit tests are tested using Jasmine.
 
-the tests can be found in the `/test/spec` directory.
+The tests can be found in the `/test/spec` directory.
 
-##Classes
+####Classes
 
 I chose 4 classes for the test:
 
@@ -50,4 +50,7 @@ I chose 4 classes for the test:
 
 +  Shop - is the main interface and would be the front-end for the customers.
 
-These are all found in `/src`
+These are all found in `/src`.
+
+#####Author
+Harry Wynn-Williams
