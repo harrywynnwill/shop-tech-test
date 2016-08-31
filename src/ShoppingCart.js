@@ -3,7 +3,7 @@
 var ShoppingCart = function(voucher) {
 	this.voucher = voucher;
 	this.basket = [];
-	this._FOOTWEAR = "Footwear";
+	this.FOOTWEAR = "Footwear";
 };
 
 ShoppingCart.prototype.addItem = function(item) {
@@ -47,7 +47,7 @@ ShoppingCart.prototype.basketViewer = function() {
 ShoppingCart.prototype.footwearCounter = function() {
 	var shoeTotal = 0;
 	for (var item in this.basket) {
-		if (this.basket[item].category.includes(this._FOOTWEAR)) {
+		if (this.basket[item].category.includes(this.FOOTWEAR)) {
 			shoeTotal++;
 		}
 	}
