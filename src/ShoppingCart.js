@@ -3,7 +3,7 @@
 var ShoppingCart = function(voucher) {
 	this.voucher = voucher;
 	this.basket = [];
-	this.FOOTWEAR = "Footwear";
+	this._FOOTWEAR = "Footwear";
 };
 
 ShoppingCart.prototype.addItem = function(item) {
@@ -35,7 +35,7 @@ ShoppingCart.prototype.voucherChoice = function(voucher) {
 			return this.voucher.ten(basketTotal);
 			break;
 		case 15:
-			return this.voucher.fifteen(basketTotal, this.footwearCounter());
+			return this.voucher.fifteen(basketTotal, this._footwearCounter());
 			break;
 	}
 };
@@ -44,10 +44,10 @@ ShoppingCart.prototype.basketViewer = function() {
 	return this.basket;
 };
 
-ShoppingCart.prototype.footwearCounter = function() {
+ShoppingCart.prototype._footwearCounter = function() {
 	var shoeTotal = 0;
 	for (var item in this.basket) {
-		if (this.basket[item].category.includes(this.FOOTWEAR)) {
+		if (this.basket[item].category.includes(this._FOOTWEAR)) {
 			shoeTotal++;
 		}
 	}

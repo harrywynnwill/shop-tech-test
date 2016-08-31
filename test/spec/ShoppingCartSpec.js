@@ -76,13 +76,13 @@ describe("ShoppingCart", function() {
 			shoppingCart.addItem(flipFlopRed.sample);
 			shoppingCart.addItem(flipFlopRed.sample);
 			shoppingCart.addItem(birdPrintDress.sample);
-			expect(shoppingCart.footwearCounter()).toEqual(2);
+			expect(shoppingCart._footwearCounter()).toEqual(2);
 		});
 		it("counts both men and womens footwear items in the basket", function() {
 			shoppingCart.addItem(flipFlopRed.sample);
 			shoppingCart.addItem(flipFlopRed.sample);
 			shoppingCart.addItem(blueSuedeShoes.sample);
-			expect(shoppingCart.footwearCounter()).toEqual(3);
+			expect(shoppingCart._footwearCounter()).toEqual(3);
 		});
 	});
 	describe("voucher choice", function() {
