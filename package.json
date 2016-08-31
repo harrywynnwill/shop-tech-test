@@ -1,0 +1,28 @@
+{
+  "name": "shop-tech-test",
+  "version": "1.0.0",
+  "description": "##Tech test",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "nodeunit test",
+    "coveralls": "jscoverage src && QUICKSORT_COV=1 nodeunit --reporter=lcov test | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrywynnwill/shop-tech-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrywynnwill/shop-tech-test/issues"
+  },
+  "homepage": "https://github.com/harrywynnwill/shop-tech-test#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.12",
+    "jscoverage": "^0.6.0",
+    "nodeunit": "^0.10.0"
+  }
+}
