@@ -35,7 +35,7 @@ ShoppingCart.prototype.voucherChoice = function(voucher) {
 			return this.voucher.ten(basketTotal);
 			break;
 		case 15:
-			return this.voucher.fifteen(basketTotal, this._footwearCounter());
+			return this.voucher.fifteen(basketTotal, this.footwearCounter());
 			break;
 	}
 };
@@ -44,7 +44,7 @@ ShoppingCart.prototype.basketViewer = function() {
 	return this.basket;
 };
 
-ShoppingCart.prototype._footwearCounter = function() {
+ShoppingCart.prototype.footwearCounter = function() {
 	var shoeTotal = 0;
 	for (var item in this.basket) {
 		if (this.basket[item].category.includes(this._FOOTWEAR)) {
