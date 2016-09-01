@@ -27,9 +27,9 @@ open test/index.html
 
 ##Design reasoning
 
-I wrote the tech test in vanilla Javascript with the view to making the website responsive with a JS framework like Angular or React.
+I wrote the tech test in vanilla Javascript with the view to making the website responsive with a JS framework.
 
-I took on the task of attempting the logic behind all of the user stories.
+I took on the task of attempting the logic behind all of the User Stories.
 If you look in `test/spec/features` each User Story is a feature test.
 
 I built it using TDD, the feature and unit tests are tested using Jasmine.
